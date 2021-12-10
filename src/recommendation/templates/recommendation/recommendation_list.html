@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+    <div class="col">
+        <h2>All products</h2>
+    </div>
+    <div class="col">
+      <h2>Recommendations for {{ request.user }} </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+
+        <table class="table">
+          <thead></thead>
+          <tbody>
+                {% for prod in all_products %}
+                <tr>
+                    <th scope="row">{{ prod.name }}</th>
+                    <td><a href='{{ prod.get_absolute_url }}'> Detail </a></td>
+                    <td><a href="{% url 'rating_product' prod.id %}"> Rate </a></td>
+                </tr>
+                {% endfor %}
+
+          </tbody>
+</table>
+
+
+
+    </div>
+    <div class="col">
+      {% for recomm in recomm_list %}
+        <p> <a href='{{ recomm.get_absolute_url }}'> {{ recomm.name }} </a> </p>
+        {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}
